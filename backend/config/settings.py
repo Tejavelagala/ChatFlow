@@ -223,16 +223,14 @@ REST_FRAMEWORK = {
 
 ASGI_APPLICATION = 'config.asgi.application'
 
-REDIS_HOST = os.getenv('REDIS_HOST', '127.0.0.1')
-REDIS_PORT = int(os.getenv('REDIS_PORT', 6379))
 
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [(REDIS_HOST, REDIS_PORT)],
+            "hosts": [os.getenv("redis://default:********@quality-boxer-119008.upstash.io:6379")],
             "capacity": 1500,
-            "expiry": 60,  # Increased to 60 seconds for message delivery
+            "expiry": 60,
         },
     },
 }
